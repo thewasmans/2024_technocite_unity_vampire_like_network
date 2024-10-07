@@ -12,6 +12,14 @@ public class PlayerController : NetworkBehaviour
         GameVariables.PlayerTransforms.Add(transform);
     }
 
+    private void Start()
+    {
+        if(IsLocalPlayer)
+        {
+            Camera.main.transform.parent = transform;
+        }
+    }
+
     void Update()
     {
         if(IsLocalPlayer)
