@@ -55,7 +55,7 @@ public class EnemySpawner : NetworkBehaviour
 
     public void SpawnLogic()
     {
-        if (!IsServer && !IsHost)
+        if (!IsServer)
             return;
         mSpawnTimer -= Time.deltaTime;
         if (mSpawnTimer > 0)
