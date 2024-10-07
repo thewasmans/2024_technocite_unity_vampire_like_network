@@ -175,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   EnemyPrefab: {fileID: 6279584355306785035, guid: f6cc0d0dcfe93e04c9d3ec738859c726, type: 3}
-  BaseEnemySpawnTime: 50
+  BaseEnemySpawnTime: 5
   GameVariables: {fileID: 11400000, guid: 02c0ae86616428d4997fe2e9b5446264, type: 2}
   SpawnDistance: 3
 --- !u!4 &420018150

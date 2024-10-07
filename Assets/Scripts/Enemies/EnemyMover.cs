@@ -57,6 +57,8 @@ public class EnemyMover : NetworkBehaviour
 
     private Vector3 GetNearestPlayerPosition()
     {
+        if (PlayerTransforms.Count == 0)
+            return Vector3.zero;
         return PlayerTransforms
             .OrderBy(t => Vector3.SqrMagnitude(t.transform.position - mTransform.position))
             .First()
