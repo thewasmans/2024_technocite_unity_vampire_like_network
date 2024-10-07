@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 549833312808144725}
   - component: {fileID: 3873872238148417610}
   - component: {fileID: 7031047351251835992}
+  - component: {fileID: 2245794610885132645}
   m_Layer: 0
   m_Name: P_Enemy
   m_TagString: Untagged
@@ -151,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3219954510
+  GlobalObjectIdHash: 128338752
   InScenePlacedSourceGlobalObjectIdHash: 0
   DeferredDespawnTick: 0
   Ownership: 1
@@ -191,6 +192,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6839d2cb9aae4764cae7f374405ca383, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2245794610885132645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279584355306785035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f65e7033c176e4dbc1546423ed07a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitPoint: 5
+  GameVariables: {fileID: 11400000, guid: 02c0ae86616428d4997fe2e9b5446264, type: 2}
 --- !u!114 &-8620382447404514980
 MonoBehaviour:
   m_ObjectHideFlags: 0

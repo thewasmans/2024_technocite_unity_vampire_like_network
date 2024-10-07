@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GarlicArea : MonoBehaviour
@@ -44,7 +45,8 @@ public class GarlicArea : MonoBehaviour
         {
             foreach (var enemy in Enemies)
             {
-                enemy.LoseDamage(Damage);
+                if(!enemy.IsDestroyed())
+                    enemy.LoseDamage(Damage);
             }
             Cooldown = 0;
         }
