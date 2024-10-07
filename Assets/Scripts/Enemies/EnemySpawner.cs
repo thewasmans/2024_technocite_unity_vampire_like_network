@@ -75,6 +75,7 @@ public class EnemySpawner : NetworkBehaviour
 
         var no = enemy.GetComponent<NetworkObject>();
         no.Spawn();
+        GameVariables.Enemies.Add(enemy.gameObject);
     }
 
     private void GetNextSpawnTimer()
