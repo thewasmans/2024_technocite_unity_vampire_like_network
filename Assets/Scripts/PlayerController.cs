@@ -4,6 +4,12 @@ public class CharacterController : MonoBehaviour
 {
     public float SpeedMovement;
     public GameObject Mesh;
+    public GameReferencesVariables GameVariables;
+
+    private void Awake()
+    {
+        GameVariables.PlayerTransforms.Add(transform);
+    }
 
     void Update()
     {
@@ -14,5 +20,10 @@ public class CharacterController : MonoBehaviour
 
         transform.Translate(direction * SpeedMovement * Time.deltaTime);
         Mesh.transform.LookAt(transform.position + direction);
+    }
+
+    private void OnDestroy()
+    {
+        GameVariables.PlayerTransforms.Remove(transform);
     }
 }

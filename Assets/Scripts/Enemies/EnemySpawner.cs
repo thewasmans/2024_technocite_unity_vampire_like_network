@@ -8,7 +8,8 @@ public class EnemySpawner : NetworkBehaviour
 {
     public GameObject EnemyPrefab;
 
-    public List<Transform> PlayerPositions = new List<Transform>();
+    public List<Transform> PlayerPositions => GameVariables.PlayerTransforms;
+    public GameReferencesVariables GameVariables;
 
     public float SpawnDistance = 3f;
     private float mSpawnTimer;
