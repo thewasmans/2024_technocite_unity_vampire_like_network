@@ -9,6 +9,9 @@ public class EnemySpawner : NetworkBehaviour
     public GameObject EnemyPrefab;
 
     public List<Transform> PlayerPositions => GameVariables.PlayerTransforms;
+[Min(0.1f)]
+    public float BaseEnemySpawnTime;
+
     public GameReferencesVariables GameVariables;
 
     public float SpawnDistance = 3f;
@@ -73,7 +76,7 @@ public class EnemySpawner : NetworkBehaviour
 
     private void GetNextSpawnTimer()
     {
-        mSpawnTimer = 5 - 4.9f * Time.time / (Time.time + 100);
+        mSpawnTimer = BaseEnemySpawnTime - (BaseEnemySpawnTime-0.05f) * Time.time / (Time.time + 100);
     }
 
     public void Update()

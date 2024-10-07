@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8194956660318337942}
   - component: {fileID: 549833312808144725}
   - component: {fileID: 3873872238148417610}
+  - component: {fileID: -8620382447404514980}
   m_Layer: 0
   m_Name: P_Enemy
   m_TagString: Untagged
@@ -104,7 +105,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -150,3 +151,15 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   Speed: 0.5
   PlayerTransforms: []
+--- !u!114 &-8620382447404514980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279584355306785035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6839d2cb9aae4764cae7f374405ca383, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
