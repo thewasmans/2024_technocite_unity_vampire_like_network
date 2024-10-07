@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1596651938376382096}
   m_Layer: 0
   m_Name: GarlicArea
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,10 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 3
-  Cooldown: 1
+  MaxCooldown: 1
   GameVariables: {fileID: 11400000, guid: 02c0ae86616428d4997fe2e9b5446264, type: 2}
   Enemies: []
-  MaxCooldown: 1
 --- !u!135 &1596651938376382096
 SphereCollider:
   m_ObjectHideFlags: 0
