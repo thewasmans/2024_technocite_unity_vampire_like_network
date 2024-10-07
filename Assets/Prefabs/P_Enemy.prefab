@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 3873872238148417610}
   - component: {fileID: 7031047351251835992}
   - component: {fileID: -3265574866241175014}
+  - component: {fileID: 2834781126646158478}
   m_Layer: 0
   m_Name: P_Enemy
   m_TagString: Untagged
@@ -205,6 +206,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExpPrefab: {fileID: 5286104249593414272, guid: a34acd020f665324c939f366b8fe8a71, type: 3}
+--- !u!114 &2834781126646158478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6279584355306785035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57f65e7033c176e4dbc1546423ed07a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitPoint: 3
+  GameVariables: {fileID: 11400000, guid: 02c0ae86616428d4997fe2e9b5446264, type: 2}
 --- !u!114 &-8620382447404514980
 MonoBehaviour:
   m_ObjectHideFlags: 0

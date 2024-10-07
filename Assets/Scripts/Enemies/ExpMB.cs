@@ -6,7 +6,7 @@ public class ExpMB : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        var playerExp = collider.attachedRigidbody.GetComponent<PlayerExpHolder>();
+        var playerExp = collider.transform.parent.parent.GetComponent<PlayerExpHolder>();
         if (playerExp == null)
             return;
         playerExp.AddExp(ExpValue);

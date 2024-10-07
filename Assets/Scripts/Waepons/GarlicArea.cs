@@ -12,7 +12,7 @@ public class GarlicArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        var enemyHealth = other.attachedRigidbody.GetComponent<EnemyHealth>();
+        var enemyHealth = other.attachedRigidbody?.GetComponent<EnemyHealth>();
 
         if (enemyHealth)
         {
@@ -22,7 +22,7 @@ public class GarlicArea : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        var enemyHealth = other.attachedRigidbody.GetComponent<EnemyHealth>();
+        var enemyHealth = other.attachedRigidbody?.GetComponent<EnemyHealth>();
         
         if (enemyHealth)
         {
