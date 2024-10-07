@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class CharacterController : MonoBehaviour
+public class PlayerController : NetworkBehaviour
 {
     public float SpeedMovement;
     public GameObject Mesh;
@@ -13,16 +14,19 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
-        var xAxis = Input.GetAxisRaw("Horizontal");
-        var yAxis = Input.GetAxisRaw("Vertical");
+        if(IsLocalPlayer)
+        { 
+            var xAxis = Input.GetAxisRaw("Horizontal");
+            var yAxis = Input.GetAxisRaw("Vertical");
 
-        var direction = (Vector3.right * xAxis + Vector3.forward * yAxis).normalized;
+            var direction = (Vector3.right * xAxis + Vector3.forward * yAxis).normalized;
 
-        transform.Translate(direction * SpeedMovement * Time.deltaTime);
-        Mesh.transform.LookAt(transform.position + direction);
+            transform.Translate(direction * SpeedMovement * Time.deltaTime);
+            Mesh.transform.LookAt(transform.position + direction);
+        }
     }
 
-    private void OnDestroy()
+    public override void OnDestroy()
     {
         GameVariables.PlayerTransforms.Remove(transform);
     }
