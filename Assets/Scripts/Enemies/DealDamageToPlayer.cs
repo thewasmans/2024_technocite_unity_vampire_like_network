@@ -8,7 +8,7 @@ public class DealDamageToPlayer : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        var pHp = collider.attachedRigidbody.gameObject.GetComponent<PlayerHealth>();
+        var pHp = collider.attachedRigidbody?.GetComponent<PlayerHealth>();
         if (pHp == null)
             return;
         playerHealths.Add(pHp);
@@ -17,7 +17,7 @@ public class DealDamageToPlayer : MonoBehaviour
 
     void OnTriggerExit(Collider collider)
     {
-        var pHp = collider.attachedRigidbody.gameObject.GetComponent<PlayerHealth>();
+        var pHp = collider.attachedRigidbody?.GetComponent<PlayerHealth>();
         if (pHp == null)
             return;
         playerHealths.Remove(pHp);

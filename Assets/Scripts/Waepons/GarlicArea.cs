@@ -5,10 +5,10 @@ using UnityEngine;
 public class GarlicArea : MonoBehaviour
 {
     public int Damage;
-    public float Cooldown;
+    public float MaxCooldown;
     public GameReferencesVariables GameVariables;
     public List<EnemyHealth> Enemies;
-    private float MaxCooldown;
+    private float Cooldown;
 
     private void OnTriggerEnter(Collider other)
     {
