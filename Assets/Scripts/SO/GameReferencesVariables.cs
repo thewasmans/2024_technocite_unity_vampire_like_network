@@ -5,4 +5,5 @@ using UnityEngine;
 public class GameReferencesVariables : ScriptableObject
 {
     public List<Transform> PlayerTransforms;
+    public List<GameObject> Enemies;
 }
