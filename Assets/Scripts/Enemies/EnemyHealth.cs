@@ -1,3 +1,5 @@
+using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
@@ -9,9 +11,11 @@ public class EnemyHealth : MonoBehaviour
     {
         HitPoint -= damage;
 
-        if(HitPoint <= 0)
+        if (HitPoint <= 0)
         {
-            Destroy(gameObject);
+            if (NetworkManager.Singleton.IsServer)
+                GetComponent<NetworkObject>().Despawn(true);
+            // Destroy(gameObject);
         }
     }
 

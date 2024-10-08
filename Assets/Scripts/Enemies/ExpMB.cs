@@ -22,6 +22,6 @@ public class ExpMB : MonoBehaviour
         if (playerExp == null)
             return;
         playerExp.AddExp(ExpValue);
-        Destroy(gameObject);
+        GetComponent<NetworkObject>().Despawn(true);
     }
 }
