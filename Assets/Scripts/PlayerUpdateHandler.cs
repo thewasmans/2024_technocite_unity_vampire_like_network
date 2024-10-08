@@ -24,7 +24,10 @@ public class PlayerUpdateHandler : NetworkBehaviour
     }
 
     [Rpc(SendTo.Server)]
-    private void GetUpgradesRpc() { }
+    private void GetUpgradesRpc()
+    {
+        nvRandomSeedForUpgrades.Value = Random.Range(0, int.MaxValue);
+    }
 
     private void GetUpgrades(int previousValue = 0, int newValue = 0)
     {
