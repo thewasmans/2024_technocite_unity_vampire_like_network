@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class EnemySpawner : NetworkBehaviour
 {
     public GameObject EnemyPrefab;
 
-    public List<Transform> PlayerPositions => GameVariables.PlayerTransforms;
+    public List<Transform> PlayerPositions => GameVariables.PlayerMB.Select(p => p.TransForm).ToList();
 
     [Min(0.1f)]
     public float BaseEnemySpawnTime;

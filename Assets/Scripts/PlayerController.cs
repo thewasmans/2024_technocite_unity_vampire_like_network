@@ -7,9 +7,9 @@ public class PlayerController : NetworkBehaviour
     public GameObject Mesh;
     public GameReferencesVariables GameVariables;
 
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
-        GameVariables.PlayerTransforms.Add(transform);
+        
     }
 
     private void Start()
@@ -32,10 +32,5 @@ public class PlayerController : NetworkBehaviour
             transform.Translate(direction * SpeedMovement * Time.deltaTime);
             Mesh.transform.LookAt(transform.position + direction);
         }
-    }
-
-    public override void OnDestroy()
-    {
-        GameVariables.PlayerTransforms.Remove(transform);
     }
 }

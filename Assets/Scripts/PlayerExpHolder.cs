@@ -4,9 +4,9 @@ using UnityEngine;
 public class PlayerExpHolder : NetworkBehaviour
 {
     private NetworkVariable<float> mExp = new NetworkVariable<float>(0);
-    private int mLevel;
+    private int mLevel = 1;
 
-    public int HpDisplayLevel;
+    public int LevelDisplay;
     public float ExpDisplay;
 
     void Start()
@@ -29,12 +29,20 @@ public class PlayerExpHolder : NetworkBehaviour
 
     private void UpdateDisplay()
     {
-        HpDisplayLevel = mLevel;
+        LevelDisplay = mLevel;
         ExpDisplay = mExp.Value;
     }
 
     private void UpdateLevel()
     {
-        mLevel = Mathf.RoundToInt(Mathf.Sqrt(mExp.Value));
+        if(mExp.Value >= ExpNextLevel())
+        {
+            mLevel =  mLevel + 1;
+            mExp.Value = 0;
+        }
     }
+    
+    public int ExpNextLevel() => mLevel * 3;
+
+    public float ProgessNextLevel() => mExp.Value / ((float)ExpNextLevel());
 }
