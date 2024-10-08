@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
@@ -6,27 +5,37 @@ using UnityEngine;
 public class PlayerUpdateHandler : NetworkBehaviour
 {
     private NetworkVariable<bool> nvIsChoosingUpgrade;
+    private NetworkVariable<int> nvRandomSeedForUpgrades;
     private List<PlayerUpgrade> mUpgradesToChooseFrom;
 
     void Start()
     {
+        nvRandomSeedForUpgrades = new NetworkVariable<int>(0);
+        nvRandomSeedForUpgrades.OnValueChanged += GetUpgrades;
         nvIsChoosingUpgrade = new NetworkVariable<bool>(
             false,
             writePerm: NetworkVariableWritePermission.Owner
         );
     }
 
-    [Rpc(SendTo.Server)]
-    private List<PlayerUpgrade> GetUpgradesRpc()
+    void OnDisable()
     {
-        return PlayerUpgrades.GetListOfUpgrades(3);
+        nvRandomSeedForUpgrades.OnValueChanged -= GetUpgrades;
+    }
+
+    [Rpc(SendTo.Server)]
+    private void GetUpgradesRpc() { }
+
+    private void GetUpgrades(int previousValue = 0, int newValue = 0)
+    {
+        mUpgradesToChooseFrom = PlayerUpgrades.GetListOfUpgrades(3, nvRandomSeedForUpgrades.Value);
     }
 
     public void OnLevelUpHandler()
     {
         nvIsChoosingUpgrade.Value = true;
 
-        mUpgradesToChooseFrom = GetUpgradesRpc();
+        GetUpgradesRpc();
     }
 
     private void ChoseUpgrade(int index)

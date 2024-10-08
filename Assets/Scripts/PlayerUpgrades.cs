@@ -8,8 +8,10 @@ public static class PlayerUpgrades
     {
         new RangePickupUpgrade(),
     };
-    public static List<PlayerUpgrade> GetListOfUpgrades(int amount)
+
+    public static List<PlayerUpgrade> GetListOfUpgrades(int amount, int seed)
     {
+        Random.InitState(seed);
         return AllUpgrades.OrderBy(c => Random.Range(0, 1f)).Take(amount).ToList();
     }
 }
