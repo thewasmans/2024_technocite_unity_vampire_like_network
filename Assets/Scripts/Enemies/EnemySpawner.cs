@@ -9,7 +9,7 @@ public class EnemySpawner : NetworkBehaviour
 {
     public GameObject EnemyPrefab;
 
-    public List<Transform> PlayerPositions => GameVariables.PlayerMB.Select(p => p.TransForm).ToList();
+    public List<Transform> PlayerPositions => GameVariables.PlayerMBs.Select(p => p.TransForm).ToList();
 
     [Min(0.1f)]
     public float BaseEnemySpawnTime;

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerMB : MonoBehaviour
 {
@@ -8,6 +7,9 @@ public class PlayerMB : MonoBehaviour
     public PlayerHealth Health;
     public Transform TransForm;
     public GameReferencesVariables GameVariables;
+    public PlayerUpdateHandler PlayerUpgradeHandler;
+    public Transform XpPickup;
+    public PlayerExpHolder PlayerExpHolder;
 
     private void Awake()
     {

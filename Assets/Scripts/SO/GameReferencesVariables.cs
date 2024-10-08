@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "GameReferencesVariables", menuName = "SO/GameReferencesVariables", order = 0)]
 public class GameReferencesVariables : ScriptableObject
 {
-    public List<PlayerMB> PlayerMB;
+    public List<PlayerMB> PlayerMBs;
     public List<GameObject> Enemies;
     
     public event Action<PlayerMB> ActionAddPlayerMB;
@@ -13,13 +13,13 @@ public class GameReferencesVariables : ScriptableObject
 
     public void AddPlayerMB(PlayerMB playerMB)
     {
-        PlayerMB.Add(playerMB);
+        PlayerMBs.Add(playerMB);
         ActionAddPlayerMB?.Invoke(playerMB);
     }
 
     public void RemovePlayerMB(PlayerMB playerMB)
     {
-        PlayerMB.Remove(playerMB);
+        PlayerMBs.Remove(playerMB);
         ActionRemovePlayerMB?.Invoke(playerMB);
     }
 }

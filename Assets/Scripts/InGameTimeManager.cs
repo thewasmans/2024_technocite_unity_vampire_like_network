@@ -15,7 +15,7 @@ public class InGameTimeManager : NetworkBehaviour
 
     void Update()
     {
-        // IsGamePaused.Value = GameReferencesVariables.PlayerTransforms.Any(p => p.IsChoosingUpgrade);
+        IsGamePaused.Value = GameReferencesVariables.PlayerMBs.Any(p => p.PlayerUpgradeHandler.IsChoosingUpgrade);
     }
 
     private void ChangeTimeScale(bool previousValue, bool newValue)

@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerUpdateHandler : NetworkBehaviour
 {
     private NetworkVariable<bool> nvIsChoosingUpgrade;
+    private PlayerMB mPlayerMB;
     private NetworkVariable<int> nvRandomSeedForUpgrades;
     private List<PlayerUpgrade> mUpgradesToChooseFrom;
+    public bool IsChoosingUpgrade => nvIsChoosingUpgrade.Value;
 
     void Start()
     {
@@ -16,6 +18,7 @@ public class PlayerUpdateHandler : NetworkBehaviour
             false,
             writePerm: NetworkVariableWritePermission.Owner
         );
+        mPlayerMB = GetComponent<PlayerMB>();
     }
 
     void OnDisable()
@@ -43,7 +46,7 @@ public class PlayerUpdateHandler : NetworkBehaviour
 
     private void ChoseUpgrade(int index)
     {
-        mUpgradesToChooseFrom[index].ApplyUpgrade();
+        mUpgradesToChooseFrom[index].ApplyUpgrade(mPlayerMB);
         nvIsChoosingUpgrade.Value = false;
         mUpgradesToChooseFrom.Clear();
     }

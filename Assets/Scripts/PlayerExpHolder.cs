@@ -8,11 +8,13 @@ public class PlayerExpHolder : NetworkBehaviour
 
     public int LevelDisplay;
     public float ExpDisplay;
+    public float XpMultiplier;
 
     void Start()
     {
         if (!IsServer)
             mExp.OnValueChanged += Refresh;
+        XpMultiplier = 1;
     }
 
     private void Refresh(float previousValue = 0, float newValue = 0)
@@ -23,7 +25,7 @@ public class PlayerExpHolder : NetworkBehaviour
 
     internal void AddExp(float expValue)
     {
-        mExp.Value += expValue;
+        mExp.Value += expValue * XpMultiplier;
         Refresh();
     }
 
@@ -35,14 +37,15 @@ public class PlayerExpHolder : NetworkBehaviour
 
     private void UpdateLevel()
     {
-        if(mExp.Value >= ExpNextLevel())
+        var xpForNextLevel = ExpNextLevel();
+        if (mExp.Value >= xpForNextLevel)
         {
-            mLevel =  mLevel + 1;
-            mExp.Value = 0;
+            mLevel += 1;
+            mExp.Value -= xpForNextLevel;
         }
     }
-    
+
     public int ExpNextLevel() => mLevel * 3;
 
-    public float ProgessNextLevel() => mExp.Value / ((float)ExpNextLevel());
+    public float ProgessNextLevel() => mExp.Value / ExpNextLevel();
 }
