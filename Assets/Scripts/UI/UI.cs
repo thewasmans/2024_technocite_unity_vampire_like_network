@@ -26,7 +26,7 @@ public class UI : MonoBehaviour
     public void AddPlayer(PlayerMB player)
     {
         UIPlayerHP playerHP = Instantiate(PrefabPlayerHP);
-        playerHP.transform.parent = Canvas.transform;
+        playerHP.transform.SetParent(Canvas.transform);
         playerHP.transform.position += Vector3.up * PlayerUIs.Count;
 
         PlayerUIs.Add(new PlayerUI()
