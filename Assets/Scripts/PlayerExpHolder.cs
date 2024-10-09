@@ -9,6 +9,12 @@ public class PlayerExpHolder : NetworkBehaviour
     public int LevelDisplay;
     public float ExpDisplay;
     public float XpMultiplier;
+    private PlayerMB mPlayerMB;
+
+    void Awake()
+    {
+        mPlayerMB = GetComponent<PlayerMB>();
+    }
 
     void Start()
     {
@@ -42,6 +48,7 @@ public class PlayerExpHolder : NetworkBehaviour
         {
             mLevel += 1;
             mExp.Value -= xpForNextLevel;
+            mPlayerMB.PlayerUpgradeHandler.OnLevelUpHandler();
         }
     }
 

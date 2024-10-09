@@ -10,8 +10,9 @@ public class PlayerUpdateHandler : NetworkBehaviour
     private List<PlayerUpgrade> mUpgradesToChooseFrom;
     public bool IsChoosingUpgrade => nvIsChoosingUpgrade.Value;
 
-    void Start()
+    void Awake()
     {
+        mUpgradesToChooseFrom = new List<PlayerUpgrade>();
         nvRandomSeedForUpgrades = new NetworkVariable<int>(0);
         nvRandomSeedForUpgrades.OnValueChanged += GetUpgrades;
         nvIsChoosingUpgrade = new NetworkVariable<bool>(
@@ -20,6 +21,8 @@ public class PlayerUpdateHandler : NetworkBehaviour
         );
         mPlayerMB = GetComponent<PlayerMB>();
     }
+
+    void Start() { }
 
     void OnDisable()
     {
@@ -53,7 +56,7 @@ public class PlayerUpdateHandler : NetworkBehaviour
 
     void OnGUI()
     {
-        if (mUpgradesToChooseFrom.Count < 0)
+        if (mUpgradesToChooseFrom.Count > 0)
             DrawUpgradePicks();
     }
 
@@ -63,7 +66,7 @@ public class PlayerUpdateHandler : NetworkBehaviour
         {
             var upgrade = mUpgradesToChooseFrom[i];
 
-            if (GUI.Button(new Rect(100, 100, 100 + i * 150, 100), upgrade.Description))
+            if (GUI.Button(new Rect(100+ i * 300, 100 , 250, 100), upgrade.Description))
             {
                 ChoseUpgrade(i);
             }

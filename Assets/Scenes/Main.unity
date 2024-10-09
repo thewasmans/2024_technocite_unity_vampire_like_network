@@ -522,8 +522,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1738915699}
-  - component: {fileID: 1738915698}
   - component: {fileID: 1738915697}
+  - component: {fileID: 1738915698}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -571,7 +571,7 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   IsGamePaused:
     m_InternalValue: 0
-  GameReferencesVariables: {fileID: 0}
+  GameReferencesVariables: {fileID: 11400000, guid: 02c0ae86616428d4997fe2e9b5446264, type: 2}
 --- !u!4 &1738915699
 Transform:
   m_ObjectHideFlags: 0
