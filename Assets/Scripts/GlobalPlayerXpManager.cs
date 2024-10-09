@@ -17,8 +17,7 @@ public class GlobalPlayerXpManager : NetworkBehaviour
     {
         mGameReferencesVariables.GlobalPlayerXpManager = this;
         inGameVariablesSO.PlayerXP = 0;
-        if (!IsServer)
-            mExp.OnValueChanged += Refresh;
+        mExp.OnValueChanged += Refresh;
         mGameReferencesVariables.ActionAddPlayerMB += CatchUpLevels;
     }
 
@@ -49,10 +48,9 @@ public class GlobalPlayerXpManager : NetworkBehaviour
 
     public float ProgessNextLevel() => mExp.Value / ExpNextLevel();
 
-    internal void AddXP(float v)
+    [Rpc(SendTo.Server)]
+    internal void AddXPRpc(float v)
     {
-        if (!IsServer)
-            return;
         mExp.Value += v;
     }
 }

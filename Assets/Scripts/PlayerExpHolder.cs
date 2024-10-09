@@ -16,6 +16,6 @@ public class PlayerExpHolder : NetworkBehaviour
 
     internal void AddExp(float expValue)
     {
-        mGameRefs.GlobalPlayerXpManager.AddXP(expValue * XpMultiplier);
+        mGameRefs.GlobalPlayerXpManager.AddXPRpc(expValue * XpMultiplier);
     }
 }
