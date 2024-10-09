@@ -44,6 +44,8 @@ public class PlayerUpdateHandler : NetworkBehaviour
 
     public void OnLevelUpHandler()
     {
+        if (!IsLocalPlayer)
+            return;
         nvIsChoosingUpgrade.Value = true;
 
         GetUpgradesRpc();
