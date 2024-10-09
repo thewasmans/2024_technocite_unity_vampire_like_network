@@ -9,8 +9,6 @@ public class EnemySpawner : NetworkBehaviour
 {
     public GameObject EnemyPrefab;
 
-    public List<Transform> PlayerPositions => GameVariables.PlayerMBs.Select(p => p.TransForm).ToList();
-
     [Min(0.1f)]
     public float BaseEnemySpawnTime;
 
@@ -27,10 +25,10 @@ public class EnemySpawner : NetworkBehaviour
     public Vector3 GetRandomSpawnPosition()
     {
         var angle = Random.Range(0, Mathf.PI * 2);
-        var player = PlayerPositions[Random.Range(0, PlayerPositions.Count)];
+        var player = GameVariables.PlayerMBs[Random.Range(0, GameVariables.PlayerMBs.Count)];
 
         var point =
-            player.transform.position
+            player.Transform.position
             + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * SpawnDistance;
         return point;
     }
@@ -42,9 +40,9 @@ public class EnemySpawner : NetworkBehaviour
         for (var i = 0; i < 20; i++)
         {
             pos = GetRandomSpawnPosition();
-            foreach (var transform in PlayerPositions)
+            foreach (var player in GameVariables.PlayerMBs)
             {
-                if (Vector3.SqrMagnitude(transform.position - pos) < distanceSqr)
+                if (Vector3.SqrMagnitude(player.Transform.position - pos) < distanceSqr)
                 {
                     pos = GetRandomSpawnPosition();
                     break;
@@ -61,7 +59,7 @@ public class EnemySpawner : NetworkBehaviour
         mSpawnTimer -= Time.deltaTime;
         if (mSpawnTimer > 0)
             return;
-        if (PlayerPositions.Count == 0)
+        if (GameVariables.PlayerMBs.Count == 0)
             return;
         SpawnNewEnemy();
     }
@@ -72,7 +70,7 @@ public class EnemySpawner : NetworkBehaviour
         var pos = GetValidSpawnPosition();
 
         var enemy = Instantiate(EnemyPrefab, pos, quaternion.identity).GetComponent<EnemyMover>();
-        enemy.PlayerTransforms = PlayerPositions;
+        enemy.PlayerMBs = GameVariables.PlayerMBs;
 
         var no = enemy.GetComponent<NetworkObject>();
         no.Spawn();

@@ -6,7 +6,7 @@ public class PlayerMB : NetworkBehaviour
     public PlayerController Controller;
     public PlayerExpHolder ExpHolder;
     public PlayerHealth Health;
-    public Transform TransForm;
+    public Transform Transform;
     public GameReferencesVariables GameVariables;
     public PlayerUpdateHandler PlayerUpgradeHandler;
     public Transform XpPickup;

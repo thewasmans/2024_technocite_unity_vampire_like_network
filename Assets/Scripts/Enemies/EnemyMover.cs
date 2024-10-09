@@ -11,7 +11,7 @@ public class EnemyMover : NetworkBehaviour
     private float mUpdateTargetTimer;
     private NetworkVariable<Vector3> mTarget;
     public float Speed = 2;
-    public List<Transform> PlayerTransforms;
+    public List<PlayerMB> PlayerMBs;
 
     void Awake()
     {
@@ -57,11 +57,12 @@ public class EnemyMover : NetworkBehaviour
 
     private Vector3 GetNearestPlayerPosition()
     {
-        if (PlayerTransforms.Count == 0)
+        if (PlayerMBs.Count == 0)
             return Vector3.zero;
-        return PlayerTransforms
+        return PlayerMBs
             .OrderBy(t => Vector3.SqrMagnitude(t.transform.position - mTransform.position))
             .First()
+            .transform
             .position;
     }
 }
