@@ -71,6 +71,7 @@ public class PlayerUpdateHandler : NetworkBehaviour
             if (GUI.Button(new Rect(100 + i * 300, 100, 250, 100), upgrade.Description))
             {
                 ChoseUpgrade(i);
+                break;
             }
         }
     }
