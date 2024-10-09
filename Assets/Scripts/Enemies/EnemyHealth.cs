@@ -1,3 +1,4 @@
+using System.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -5,6 +6,9 @@ public class EnemyHealth : MonoBehaviour
 {
     public int HitPoint;
     public GameReferencesVariables GameVariables;
+    public MeshRenderer Renderer;
+    public Material EnemyNormalMaterial;
+    public Material EnemyDamagelMaterial;
 
     public void LoseDamage(int damage)
     {
@@ -16,6 +20,19 @@ public class EnemyHealth : MonoBehaviour
                 GetComponent<NetworkObject>().Despawn(true);
             // Destroy(gameObject);
         }
+        
+        StartCoroutine(AnimateDamage());
+    }
+
+    public IEnumerator AnimateDamage()
+    {
+        Renderer.material = EnemyDamagelMaterial;
+        yield return new WaitForSeconds(.1f);
+        Renderer.material = EnemyNormalMaterial;
+        yield return new WaitForSeconds(.1f);
+        Renderer.material = EnemyDamagelMaterial;
+        yield return new WaitForSeconds(.1f);
+        Renderer.material = EnemyNormalMaterial;
     }
 
     public void OnDestroy()

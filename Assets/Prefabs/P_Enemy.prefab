@@ -220,6 +220,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HitPoint: 3
   GameVariables: {fileID: 11400000, guid: 02c0ae86616428d4997fe2e9b5446264, type: 2}
+  Renderer: {fileID: 6319019687952026190}
+  EnemyNormalMaterial: {fileID: 2100000, guid: 0ad962a2d0ed3d84e84b8f92174b8ae0, type: 2}
+  EnemyDamagelMaterial: {fileID: 2100000, guid: c2bb74e929607b5429a865af3df1e51c, type: 2}
 --- !u!114 &-8620382447404514980
 MonoBehaviour:
   m_ObjectHideFlags: 0
