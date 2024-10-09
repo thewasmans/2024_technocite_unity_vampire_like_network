@@ -763,6 +763,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2590014934279650369}
     m_Modifications:
+    - target: {fileID: 4079818695049396338, guid: 9b83f1d3b99a15e419e1b0227e5b17f3, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4079818695049396338, guid: 9b83f1d3b99a15e419e1b0227e5b17f3, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4140473249603828680, guid: 9b83f1d3b99a15e419e1b0227e5b17f3, type: 3}
       propertyPath: m_Name
       value: GarlicArea

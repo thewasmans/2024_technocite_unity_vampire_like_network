@@ -5,7 +5,8 @@ using Random = UnityEngine.Random;
 public static class PlayerUpgrades
 {
     public static List<PlayerUpgrade> AllBaseUpgrades;
-    public static List<PlayerUpgrade> GarlicUpgrades = new List<PlayerUpgrade>(){
+    public static List<PlayerUpgrade> GarlicUpgrades = new List<PlayerUpgrade>()
+    {
         new GarlicWeaponRangeUpgrade(),
     };
 
@@ -37,11 +38,11 @@ public static class PlayerUpgrades
     {
         Random.InitState(seed);
         var availableUpgrade = AllBaseUpgrades.ToList();
-        if(player.GarlicArea.isActiveAndEnabled)
-        availableUpgrade.AddRange(GarlicUpgrades);
-        else 
-        availableUpgrade.Add(new GarlicWeaponUnlockUpgrade());
-        return AllBaseUpgrades.OrderBy(c => Random.Range(0, 1f)).Take(amount).ToList();
+        if (player.GarlicArea.isActiveAndEnabled)
+            availableUpgrade.AddRange(GarlicUpgrades);
+        else
+            availableUpgrade.Add(new GarlicWeaponUnlockUpgrade());
+        return availableUpgrade.OrderBy(c => Random.Range(0, 1f)).Take(amount).ToList();
     }
 }
 
@@ -65,7 +66,6 @@ public class GarlicWeaponRangeUpgrade : PlayerUpgrade
 
     public override void ApplyUpgrade(PlayerMB player)
     {
-        
         player.GarlicArea.Range *= mRatio;
     }
 }
