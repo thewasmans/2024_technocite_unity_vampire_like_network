@@ -1,6 +1,7 @@
+using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerMB : MonoBehaviour
+public class PlayerMB : NetworkBehaviour
 {
     public PlayerController Controller;
     public PlayerExpHolder ExpHolder;
@@ -11,13 +12,14 @@ public class PlayerMB : MonoBehaviour
     public Transform XpPickup;
     public PlayerExpHolder PlayerExpHolder;
 
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
         GameVariables.AddPlayerMB(this);
     }
 
-    private void OnDestroy()
+    public override void OnDestroy()
     {
         GameVariables.RemovePlayerMB(this);
+        base.OnDestroy();
     }
 }

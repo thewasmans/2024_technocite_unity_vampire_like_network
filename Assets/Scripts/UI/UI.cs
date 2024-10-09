@@ -16,11 +16,16 @@ public class UI : MonoBehaviour
     public Canvas Canvas;
     public UIPlayerHP PrefabPlayerHP;
     public List<PlayerUI> PlayerUIs;
-    public UIPlayerExperience PlayerExperience;
+    public UIPlayerExperience PlayerExperience; 
 
     private void Awake()
     {
-        GameVariables.ActionAddPlayerMB += p => AddPlayer(p); 
+        GameVariables.ActionAddPlayerMB += p => AddPlayer(p);
+        
+        foreach (var player in GameVariables.PlayerMBs)
+        {
+            AddPlayer(player);
+        }
     }
 
     public void AddPlayer(PlayerMB player)

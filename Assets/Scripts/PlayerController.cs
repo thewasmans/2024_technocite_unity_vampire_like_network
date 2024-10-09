@@ -7,11 +7,6 @@ public class PlayerController : NetworkBehaviour
     public GameObject Mesh;
     public GameReferencesVariables GameVariables;
 
-    public override void OnNetworkSpawn()
-    {
-        
-    }
-
     private void Start()
     {
         if(IsLocalPlayer)
@@ -32,5 +27,9 @@ public class PlayerController : NetworkBehaviour
             transform.Translate(direction * SpeedMovement * Time.deltaTime);
             Mesh.transform.LookAt(transform.position + direction);
         }
+    }
+
+    public override void OnDestroy()
+    {
     }
 }

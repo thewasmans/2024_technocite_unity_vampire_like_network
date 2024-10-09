@@ -1,12 +1,14 @@
+using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : NetworkBehaviour
 {
-    public string SceneName;
+    public UnityEditor.SceneAsset UIScene;
 
-    private void Awake()
+    public override void OnNetworkSpawn()
     {
-        SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
-    }    
+        if(IsServer)
+            NetworkManager.Singleton.SceneManager.LoadScene(UIScene.name, LoadSceneMode.Additive);
+    }
 }
