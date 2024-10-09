@@ -53,7 +53,7 @@ public class PlayerUpdateHandler : NetworkBehaviour
     {
         mUpgradesToChooseFrom[0][index].ApplyUpgrade(mPlayerMB);
         nvIsChoosingUpgrade.Value = false;
-        mUpgradesToChooseFrom.Clear();
+        mUpgradesToChooseFrom.RemoveAt(0);
     }
 
     void OnGUI()
