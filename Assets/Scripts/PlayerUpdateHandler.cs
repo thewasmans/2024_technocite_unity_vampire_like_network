@@ -7,12 +7,12 @@ public class PlayerUpdateHandler : NetworkBehaviour
     private NetworkVariable<bool> nvIsChoosingUpgrade;
     private PlayerMB mPlayerMB;
     private NetworkVariable<int> nvRandomSeedForUpgrades;
-    private List<PlayerUpgrade> mUpgradesToChooseFrom;
+    private List<List<PlayerUpgrade>> mUpgradesToChooseFrom;
     public bool IsChoosingUpgrade => nvIsChoosingUpgrade.Value;
 
     void Awake()
     {
-        mUpgradesToChooseFrom = new List<PlayerUpgrade>();
+        mUpgradesToChooseFrom = new List<List<PlayerUpgrade>>();
         nvRandomSeedForUpgrades = new NetworkVariable<int>(0);
         nvRandomSeedForUpgrades.OnValueChanged += GetUpgrades;
         nvIsChoosingUpgrade = new NetworkVariable<bool>(
@@ -37,7 +37,9 @@ public class PlayerUpdateHandler : NetworkBehaviour
 
     private void GetUpgrades(int previousValue = 0, int newValue = 0)
     {
-        mUpgradesToChooseFrom = PlayerUpgrades.GetListOfUpgrades(3, nvRandomSeedForUpgrades.Value);
+        mUpgradesToChooseFrom.Add(
+            PlayerUpgrades.GetListOfUpgrades(3, nvRandomSeedForUpgrades.Value)
+        );
     }
 
     public void OnLevelUpHandler()
@@ -49,7 +51,7 @@ public class PlayerUpdateHandler : NetworkBehaviour
 
     private void ChoseUpgrade(int index)
     {
-        mUpgradesToChooseFrom[index].ApplyUpgrade(mPlayerMB);
+        mUpgradesToChooseFrom[0][index].ApplyUpgrade(mPlayerMB);
         nvIsChoosingUpgrade.Value = false;
         mUpgradesToChooseFrom.Clear();
     }
@@ -62,11 +64,11 @@ public class PlayerUpdateHandler : NetworkBehaviour
 
     private void DrawUpgradePicks()
     {
-        for (int i = 0; i < mUpgradesToChooseFrom.Count; i++)
+        for (int i = 0; i < mUpgradesToChooseFrom[0].Count; i++)
         {
-            var upgrade = mUpgradesToChooseFrom[i];
+            var upgrade = mUpgradesToChooseFrom[0][i];
 
-            if (GUI.Button(new Rect(100+ i * 300, 100 , 250, 100), upgrade.Description))
+            if (GUI.Button(new Rect(100 + i * 300, 100, 250, 100), upgrade.Description))
             {
                 ChoseUpgrade(i);
             }

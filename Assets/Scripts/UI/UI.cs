@@ -46,7 +46,7 @@ public class UI : MonoBehaviour
             player.hpUI.SetHPValue(player.health.Hp/5.0f);
             
             if(player.experience.IsLocalPlayer)
-                PlayerExperience.SetExperienceValue(player.experience.ProgessNextLevel());
+                PlayerExperience.SetExperienceValue(GameVariables.GlobalPlayerXpManager.ProgessNextLevel());
         }
     }
 }

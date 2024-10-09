@@ -10,6 +10,7 @@ public class GameReferencesVariables : ScriptableObject
     
     public event Action<PlayerMB> ActionAddPlayerMB;
     public event Action<PlayerMB> ActionRemovePlayerMB;
+    public GlobalPlayerXpManager GlobalPlayerXpManager;
 
     public void AddPlayerMB(PlayerMB playerMB)
     {
