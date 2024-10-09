@@ -306,8 +306,8 @@ GameObject:
   - component: {fileID: -87541287506231120}
   - component: {fileID: 5395857012939508299}
   - component: {fileID: -1460944141820102596}
-  - component: {fileID: 73847616294496613}
   - component: {fileID: 9049897716082670847}
+  - component: {fileID: 73847616294496613}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -467,19 +467,6 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   XpMultiplier: 0
   mGameRefs: {fileID: 11400000, guid: 02c0ae86616428d4997fe2e9b5446264, type: 2}
---- !u!114 &73847616294496613
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2463531463415624643}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70c60003d9859f745b6f578ea6c4e722, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!114 &9049897716082670847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,11 +483,25 @@ MonoBehaviour:
   Controller: {fileID: -87541287506231120}
   ExpHolder: {fileID: -1460944141820102596}
   Health: {fileID: 5395857012939508299}
-  Transform: {fileID: 6123561807945030028}
+  TransForm: {fileID: 6123561807945030028}
   GameVariables: {fileID: 11400000, guid: 02c0ae86616428d4997fe2e9b5446264, type: 2}
   PlayerUpgradeHandler: {fileID: 73847616294496613}
   XpPickup: {fileID: 5073755706565589261}
   PlayerExpHolder: {fileID: -1460944141820102596}
+  GarlicArea: {fileID: 7610157598385576483}
+--- !u!114 &73847616294496613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2463531463415624643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70c60003d9859f745b6f578ea6c4e722, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowTopMostFoldoutHeaderGroup: 1
 --- !u!1 &4184310484694618176
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,3 +817,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8211775008556879511, guid: 9b83f1d3b99a15e419e1b0227e5b17f3, type: 3}
   m_PrefabInstance: {fileID: 6793262018513410347}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7610157598385576483 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4024588400436052744, guid: 9b83f1d3b99a15e419e1b0227e5b17f3, type: 3}
+  m_PrefabInstance: {fileID: 6793262018513410347}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8df28e221e09e34e93e26a42293a178, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

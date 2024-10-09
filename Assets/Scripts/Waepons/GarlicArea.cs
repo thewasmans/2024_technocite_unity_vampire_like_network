@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GarlicArea : MonoBehaviour
 {
+    public float Range;
+    public Transform Transform;
     public int Damage;
     public float MaxCooldown;
     public GameReferencesVariables GameVariables;
@@ -23,11 +25,16 @@ public class GarlicArea : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         var enemyHealth = other.attachedRigidbody?.GetComponent<EnemyHealth>();
-        
+
         if (enemyHealth)
         {
             Enemies.Remove(enemyHealth);
         }
+    }
+
+    void Awake()
+    {
+        Transform = transform;
     }
 
     void Start()
@@ -37,6 +44,7 @@ public class GarlicArea : MonoBehaviour
 
     void Update()
     {
+        Transform.localScale = Vector3.one * Range;
         if (Cooldown < MaxCooldown)
         {
             Cooldown += Time.deltaTime;
@@ -45,7 +53,7 @@ public class GarlicArea : MonoBehaviour
         {
             foreach (var enemy in Enemies)
             {
-                if(!enemy.IsDestroyed())
+                if (!enemy.IsDestroyed())
                     enemy.LoseDamage(Damage);
             }
             Cooldown = 0;

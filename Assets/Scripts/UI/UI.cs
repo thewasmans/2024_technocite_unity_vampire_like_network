@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine; 
+using UnityEngine;
 
 [Serializable]
 public struct PlayerUI
@@ -16,12 +16,12 @@ public class UI : MonoBehaviour
     public Canvas Canvas;
     public UIPlayerHP PrefabPlayerHP;
     public List<PlayerUI> PlayerUIs;
-    public UIPlayerExperience PlayerExperience; 
+    public UIPlayerExperience PlayerExperience;
 
     private void Awake()
     {
         GameVariables.ActionAddPlayerMB += p => AddPlayer(p);
-        
+
         foreach (var player in GameVariables.PlayerMBs)
         {
             AddPlayer(player);
@@ -34,12 +34,14 @@ public class UI : MonoBehaviour
         playerHP.transform.SetParent(Canvas.transform);
         playerHP.transform.position += Vector3.up * PlayerUIs.Count;
 
-        PlayerUIs.Add(new PlayerUI()
-        {
-            health = player.Health,
-            experience = player.ExpHolder,
-            hpUI = playerHP,
-        });
+        PlayerUIs.Add(
+            new PlayerUI()
+            {
+                health = player.Health,
+                experience = player.ExpHolder,
+                hpUI = playerHP,
+            }
+        );
 
         playerHP.SetPlayerName("Player " + PlayerUIs.Count);
     }
@@ -48,10 +50,12 @@ public class UI : MonoBehaviour
     {
         foreach (var player in PlayerUIs)
         {
-            player.hpUI.SetHPValue(player.health.Hp/5.0f);
-            
-            if(player.experience.IsLocalPlayer)
-                PlayerExperience.SetExperienceValue(GameVariables.GlobalPlayerXpManager.ProgessNextLevel());
+            player.hpUI.SetHPValue(player.health.Hp / player.health.MaxHp);
+
+            if (player.experience.IsLocalPlayer)
+                PlayerExperience.SetExperienceValue(
+                    GameVariables.GlobalPlayerXpManager.ProgessNextLevel()
+                );
         }
     }
 }

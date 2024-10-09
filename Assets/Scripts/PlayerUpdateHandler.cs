@@ -38,7 +38,7 @@ public class PlayerUpdateHandler : NetworkBehaviour
     private void GetUpgrades(int previousValue = 0, int newValue = 0)
     {
         mUpgradesToChooseFrom.Add(
-            PlayerUpgrades.GetListOfUpgrades(3, nvRandomSeedForUpgrades.Value)
+            PlayerUpgrades.GetListOfUpgrades(mPlayerMB, 3, nvRandomSeedForUpgrades.Value)
         );
     }
 

@@ -11,6 +11,7 @@ public class PlayerMB : NetworkBehaviour
     public PlayerUpdateHandler PlayerUpgradeHandler;
     public Transform XpPickup;
     public PlayerExpHolder PlayerExpHolder;
+    public GarlicArea GarlicArea;
 
     public override void OnNetworkSpawn()
     {
