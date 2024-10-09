@@ -483,7 +483,7 @@ MonoBehaviour:
   Controller: {fileID: -87541287506231120}
   ExpHolder: {fileID: -1460944141820102596}
   Health: {fileID: 5395857012939508299}
-  TransForm: {fileID: 6123561807945030028}
+  Transform: {fileID: 6123561807945030028}
   GameVariables: {fileID: 11400000, guid: 02c0ae86616428d4997fe2e9b5446264, type: 2}
   PlayerUpgradeHandler: {fileID: 73847616294496613}
   XpPickup: {fileID: 5073755706565589261}
