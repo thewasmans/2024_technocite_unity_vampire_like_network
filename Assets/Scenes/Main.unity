@@ -511,6 +511,7 @@ GameObject:
   - component: {fileID: 1738915697}
   - component: {fileID: 1738915698}
   - component: {fileID: 1738915700}
+  - component: {fileID: 1738915701}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -589,6 +590,15 @@ MonoBehaviour:
   ShowTopMostFoldoutHeaderGroup: 1
   inGameVariablesSO: {fileID: 11400000, guid: 1fae24ff493448f46966446bb9561d91, type: 2}
   mGameReferencesVariables: {fileID: 11400000, guid: 02c0ae86616428d4997fe2e9b5446264, type: 2}
+--- !u!114 &1738915701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738915696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c76b7a42a6699d4caa18057968e1fb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
