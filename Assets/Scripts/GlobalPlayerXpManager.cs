@@ -10,7 +10,7 @@ public class GlobalPlayerXpManager : NetworkBehaviour
 
     [SerializeField]
     private GameReferencesVariables mGameReferencesVariables;
-    private int mLevel;
+    private int mLevel = 1;
     public int Level => mLevel;
 
     void Start()
@@ -23,7 +23,7 @@ public class GlobalPlayerXpManager : NetworkBehaviour
 
     private void CatchUpLevels(PlayerMB mB)
     {
-        for (int i = 0; i < Level; i++)
+        for (int i = 1; i < Level; i++)
             mB.PlayerUpgradeHandler.OnLevelUpHandler();
     }
 

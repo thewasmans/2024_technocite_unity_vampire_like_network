@@ -20,13 +20,15 @@ public class UI : MonoBehaviour
 
     private void Awake()
     {
-        GameVariables.ActionAddPlayerMB += p => AddPlayer(p);
+        GameVariables.ActionAddPlayerMB += AddPlayersAwake;
 
         foreach (var player in GameVariables.PlayerMBs)
         {
             AddPlayer(player);
         }
     }
+
+    public void AddPlayersAwake(PlayerMB p) => AddPlayer(p);
 
     public void AddPlayer(PlayerMB player)
     {
@@ -48,14 +50,19 @@ public class UI : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log("UI up");
         foreach (var player in PlayerUIs)
         {
-            player.hpUI.SetHPValue(player.health.Hp / player.health.MaxHp);
-
-            if (player.experience.IsLocalPlayer)
-                PlayerExperience.SetExperienceValue(
-                    GameVariables.GlobalPlayerXpManager.ProgessNextLevel()
-                );
+            player.hpUI.SetHPValue(player.health.Hp / (float)player.health.MaxHp); 
+            
+            PlayerExperience.SetExperienceValue(
+                GameVariables.GlobalPlayerXpManager.ProgessNextLevel()
+            );
         }
+    }
+
+    private void OnDestroy()
+    {
+        GameVariables.ActionAddPlayerMB -= AddPlayersAwake;
     }
 }

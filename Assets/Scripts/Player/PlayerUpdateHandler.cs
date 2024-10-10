@@ -17,7 +17,7 @@ public class PlayerUpdateHandler : NetworkBehaviour
         nvRandomSeedForUpgrades.OnValueChanged += GetUpgrades;
         nvIsChoosingUpgrade = new NetworkVariable<bool>(
             false,
-            writePerm: NetworkVariableWritePermission.Owner
+            writePerm: NetworkVariableWritePermission.Server
         );
         mPlayerMB = GetComponent<PlayerMB>();
     }
@@ -54,8 +54,17 @@ public class PlayerUpdateHandler : NetworkBehaviour
     private void ChoseUpgrade(int index)
     {
         mUpgradesToChooseFrom[0][index].ApplyUpgrade(mPlayerMB);
-        nvIsChoosingUpgrade.Value = false;
         mUpgradesToChooseFrom.RemoveAt(0);
+
+        if(mUpgradesToChooseFrom.Count <= 0)
+            ValidateChoiceRpc();
+    }
+
+    [Rpc(SendTo.Server)]
+    public void ValidateChoiceRpc()
+    {
+
+        nvIsChoosingUpgrade.Value = false;
     }
 
     void OnGUI()
