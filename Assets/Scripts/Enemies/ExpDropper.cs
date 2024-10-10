@@ -4,8 +4,9 @@ using UnityEngine;
 public class ExpDropper : MonoBehaviour
 {
     public GameObject ExpPrefab;
+    public Vector3 LastDeathPosition;
 
-    void OnDestroy()
+    void OnDisable()
     {
         if (NetworkManager.Singleton.IsServer)
             DropExp();
@@ -13,7 +14,7 @@ public class ExpDropper : MonoBehaviour
 
     private void DropExp()
     {
-        var go = Instantiate(ExpPrefab, transform.position, Quaternion.identity);
+        var go = Instantiate(ExpPrefab, LastDeathPosition, Quaternion.identity);
         go.GetComponent<NetworkObject>().Spawn();
     }
 }

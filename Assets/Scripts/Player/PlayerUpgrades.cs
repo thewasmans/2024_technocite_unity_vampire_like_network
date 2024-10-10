@@ -58,6 +58,17 @@ public class GarlicWeaponUnlockUpgrade : PlayerUpgrade
     }
 }
 
+public class GarlicWeaponDamageUpgrade : PlayerUpgrade
+{
+    private int IncreaseAmount = 1;
+    public override string Description => $"Increase Garlic damage by {IncreaseAmount}";
+
+    public override void ApplyUpgrade(PlayerMB player)
+    {
+        player.GarlicArea.Damage += IncreaseAmount;
+    }
+}
+
 public class GarlicWeaponRangeUpgrade : PlayerUpgrade
 {
     private float mRatio => 1 + IncreasePercentage / (float)100;
