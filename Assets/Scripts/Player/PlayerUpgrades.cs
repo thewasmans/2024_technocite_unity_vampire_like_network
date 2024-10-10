@@ -8,6 +8,7 @@ public static class PlayerUpgrades
     public static List<PlayerUpgrade> GarlicUpgrades = new List<PlayerUpgrade>()
     {
         new GarlicWeaponRangeUpgrade(),
+        new GarlicWeaponDamageUpgrade(),
     };
 
     static PlayerUpgrades()
@@ -48,6 +49,8 @@ public static class PlayerUpgrades
 
 #region Weapon Upgrades
 
+#region GarlicUpgrades
+
 public class GarlicWeaponUnlockUpgrade : PlayerUpgrade
 {
     public override string Description => "Unlock Garlic Weapon";
@@ -55,6 +58,17 @@ public class GarlicWeaponUnlockUpgrade : PlayerUpgrade
     public override void ApplyUpgrade(PlayerMB player)
     {
         player.GarlicArea.gameObject.SetActive(true);
+    }
+}
+
+public class GarlicWeaponDamageUpgrade : PlayerUpgrade
+{
+    private int IncreaseAmount = 1;
+    public override string Description => $"Increase Garlic damage by {IncreaseAmount}";
+
+    public override void ApplyUpgrade(PlayerMB player)
+    {
+        player.GarlicArea.Damage += IncreaseAmount;
     }
 }
 
@@ -70,6 +84,7 @@ public class GarlicWeaponRangeUpgrade : PlayerUpgrade
     }
 }
 
+#endregion
 #endregion
 #region Player Upgrades
 public abstract class PlayerUpgrade
