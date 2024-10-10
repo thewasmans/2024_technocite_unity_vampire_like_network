@@ -16,10 +16,16 @@ public class PlayerMB : NetworkBehaviour
     public override void OnNetworkSpawn()
     {
         GameVariables.AddPlayerMB(this);
+        if (IsLocalPlayer)
+            GameVariables.GlobalPlayerXpManager.nvLevel.OnValueChanged +=
+                PlayerUpgradeHandler.OnLevelUpHandler;
     }
 
     public override void OnDestroy()
     {
+        if (IsLocalPlayer)
+            GameVariables.GlobalPlayerXpManager.nvLevel.OnValueChanged -=
+                PlayerUpgradeHandler.OnLevelUpHandler;
         GameVariables.RemovePlayerMB(this);
         base.OnDestroy();
     }

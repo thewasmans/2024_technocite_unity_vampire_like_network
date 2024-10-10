@@ -1,16 +1,16 @@
-using System;
 using Unity.Netcode;
 using UnityEngine;
 
 public class GlobalPlayerXpManager : NetworkBehaviour
 {
     private NetworkVariable<float> mExp = new NetworkVariable<float>(0);
+    public NetworkVariable<int> nvLevel = new NetworkVariable<int>(1);
 
     public InGameVariablesSO inGameVariablesSO;
 
     [SerializeField]
     private GameReferencesVariables mGameReferencesVariables;
-    private int mLevel = 1;
+    private int mLevel => nvLevel.Value;
     public int Level => mLevel;
 
     void Start()
@@ -21,10 +21,12 @@ public class GlobalPlayerXpManager : NetworkBehaviour
         mGameReferencesVariables.ActionAddPlayerMB += CatchUpLevels;
     }
 
+
     private void CatchUpLevels(PlayerMB mB)
     {
-        for (int i = 1; i < Level; i++)
-            mB.PlayerUpgradeHandler.OnLevelUpHandler();
+        if (mB.IsLocalPlayer)
+            for (int i = 1; i < Level; i++)
+                mB.PlayerUpgradeHandler.OnLevelUpHandler();
     }
 
     private void Refresh(float previousValue = 0, float newValue = 0)
@@ -37,10 +39,10 @@ public class GlobalPlayerXpManager : NetworkBehaviour
         var xpForNextLevel = ExpNextLevel();
         if (mExp.Value >= xpForNextLevel)
         {
-            mLevel += 1;
+            nvLevel.Value += 1;
             mExp.Value -= xpForNextLevel;
-            foreach (var p in mGameReferencesVariables.PlayerMBs)
-                p.PlayerUpgradeHandler.OnLevelUpHandler();
+            // foreach (var p in mGameReferencesVariables.PlayerMBs)
+            //     p.PlayerUpgradeHandler.OnLevelUpHandler();
         }
     }
 

@@ -13,11 +13,15 @@ public class PlayerUpdateHandler : NetworkBehaviour
     void Awake()
     {
         mUpgradesToChooseFrom = new List<List<PlayerUpgrade>>();
-        nvRandomSeedForUpgrades = new NetworkVariable<int>(0);
+        nvRandomSeedForUpgrades = new NetworkVariable<int>(
+            0,
+            readPerm: NetworkVariableReadPermission.Owner
+        );
         nvRandomSeedForUpgrades.OnValueChanged += GetUpgrades;
         nvIsChoosingUpgrade = new NetworkVariable<bool>(
             false,
-            writePerm: NetworkVariableWritePermission.Server
+            writePerm: NetworkVariableWritePermission.Owner,
+            readPerm: NetworkVariableReadPermission.Owner
         );
         mPlayerMB = GetComponent<PlayerMB>();
     }
@@ -37,40 +41,37 @@ public class PlayerUpdateHandler : NetworkBehaviour
 
     private void GetUpgrades(int previousValue = 0, int newValue = 0)
     {
+        if (!IsLocalPlayer)
+            return;
         mUpgradesToChooseFrom.Add(
             PlayerUpgrades.GetListOfUpgrades(mPlayerMB, 3, nvRandomSeedForUpgrades.Value)
         );
     }
 
-    public void OnLevelUpHandler()
+    public void OnLevelUpHandler(int v = 0, int v2 = 0)
     {
-        if (!IsLocalPlayer)
-            return;
-        nvIsChoosingUpgrade.Value = true;
-
-        GetUpgradesRpc();
+        if (IsLocalPlayer)
+            GetUpgradesRpc();
     }
 
     private void ChoseUpgrade(int index)
     {
         mUpgradesToChooseFrom[0][index].ApplyUpgrade(mPlayerMB);
         mUpgradesToChooseFrom.RemoveAt(0);
-
-        if(mUpgradesToChooseFrom.Count <= 0)
-            ValidateChoiceRpc();
-    }
-
-    [Rpc(SendTo.Server)]
-    public void ValidateChoiceRpc()
-    {
-
-        nvIsChoosingUpgrade.Value = false;
     }
 
     void OnGUI()
     {
-        if (mUpgradesToChooseFrom.Count > 0)
-            DrawUpgradePicks();
+        if (IsLocalPlayer)
+            if (mUpgradesToChooseFrom.Count > 0)
+            {
+                DrawUpgradePicks();
+                nvIsChoosingUpgrade.Value = true;
+            }
+            else
+            {
+                nvIsChoosingUpgrade.Value = false;
+            }
     }
 
     private void DrawUpgradePicks()

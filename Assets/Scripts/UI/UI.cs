@@ -50,7 +50,7 @@ public class UI : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("UI up");
+        // Debug.Log("UI up");
         foreach (var player in PlayerUIs)
         {
             player.hpUI.SetHPValue(player.health.Hp / (float)player.health.MaxHp); 
