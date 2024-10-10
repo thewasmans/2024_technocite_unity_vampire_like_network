@@ -12,10 +12,20 @@ public class PlayerMB : NetworkBehaviour
     public Transform XpPickup;
     public PlayerExpHolder PlayerExpHolder;
     public GarlicArea GarlicArea;
+    public GunBullet GunBullet;
 
     public override void OnNetworkSpawn()
     {
         GameVariables.AddPlayerMB(this);
+
+        if(IsLocalPlayer)
+            InitialiseWeaponRpc();
+    }
+
+    [Rpc(SendTo.Server)]
+    public void InitialiseWeaponRpc() 
+    {
+        StartCoroutine(GunBullet.FireGun());
     }
 
     public override void OnDestroy()
