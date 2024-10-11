@@ -1,11 +1,12 @@
-using System;
 using Unity.Netcode;
-using UnityEngine;
 using UnityEngine.SceneManagement;
+using Object = UnityEngine.Object;
 
 public class GameManager : NetworkBehaviour
 {
-    public UnityEditor.SceneAsset UIScene;
+    public Object Scene;
+    public string SceneName;
+    
     public GameReferencesVariables GameVariables;
 
     private void Awake()
@@ -15,7 +16,7 @@ public class GameManager : NetworkBehaviour
 
     public void LoadUIHUD(PlayerMB mB)
     {
-        NetworkManager.Singleton.SceneManager.LoadScene(UIScene.name, LoadSceneMode.Additive);
+        NetworkManager.Singleton.SceneManager.LoadScene(SceneName, LoadSceneMode.Additive);
         GameVariables.ActionAddPlayerMB -= LoadUIHUD;
     }
 }
