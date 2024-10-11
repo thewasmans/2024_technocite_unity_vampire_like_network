@@ -8,6 +8,7 @@ public class BulletMb : MonoBehaviour
     public NetworkObject NetworkObject;
     private Transform mTransform;
     public float LifeTime = 10f;
+
     void Awake()
     {
         mTransform = transform;
@@ -34,10 +35,9 @@ public class BulletMb : MonoBehaviour
     {
         if (NetworkObject == null)
             return;
-        if (!NetworkManager.Singleton.IsServer)
-            return;
-        if (NetworkObject.IsSpawned)
-            NetworkObject.Despawn();
+        if (NetworkManager.Singleton.IsServer)
+            if (NetworkObject.IsSpawned)
+                NetworkObject.Despawn(true);
     }
 
     void OnDestroy()
@@ -48,6 +48,5 @@ public class BulletMb : MonoBehaviour
     internal void DestroyBullet()
     {
         Despawn();
-        Destroy(gameObject);
     }
 }
