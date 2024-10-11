@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class GarlicArea : MonoBehaviour
+public class GarlicArea : MonoBehaviour, IActivableWeapon
 {
     public float Range;
     public Transform Transform;
@@ -11,6 +11,8 @@ public class GarlicArea : MonoBehaviour
     public GameReferencesVariables GameVariables;
     public List<EnemyHealth> Enemies;
     private float Cooldown;
+
+    public bool IsActivated => gameObject.activeSelf;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -58,5 +60,15 @@ public class GarlicArea : MonoBehaviour
             }
             Cooldown = 0;
         }
+    }
+
+    public void ActivateWeapon()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void DeactivateWeapon()
+    {
+        gameObject.SetActive(false);
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.Netcode;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
@@ -20,7 +21,7 @@ public class EnemyHealth : MonoBehaviour
                 GetComponent<NetworkObject>().Despawn(true);
             // Destroy(gameObject);
         }
-        
+
         StartCoroutine(AnimateDamage());
     }
 
@@ -38,5 +39,15 @@ public class EnemyHealth : MonoBehaviour
     public void OnDestroy()
     {
         GameVariables.Enemies.Remove(gameObject);
+        StopAllCoroutines();
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        var bullet = collider.transform.parent.parent.GetComponent<BulletMb>();
+        if (bullet == null)
+            return;
+        LoseDamage(Mathf.RoundToInt(bullet.Damage));
+        bullet.DestroyBullet();
     }
 }

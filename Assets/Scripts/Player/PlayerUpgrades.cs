@@ -11,6 +11,17 @@ public static class PlayerUpgrades
         new GarlicWeaponDamageUpgrade(),
     };
 
+    public static List<PlayerUpgrade> PistolUpgrades = new List<PlayerUpgrade>()
+    {
+        new PistolWeaponDamageUpgrade(),
+        new PistolWeaponFireRateUpgrade(),
+    };
+
+    public static List<PlayerUpgrade> BurstSmgUpgrades = new List<PlayerUpgrade>()
+    {
+        new SmgWeaponDamageUpgrade(),
+    };
+
     static PlayerUpgrades()
     {
         AllBaseUpgrades = CreateAllAvailableUpgradesList();
@@ -39,15 +50,80 @@ public static class PlayerUpgrades
     {
         Random.InitState(seed);
         var availableUpgrade = AllBaseUpgrades.ToList();
-        if (player.GarlicArea.isActiveAndEnabled)
+        if (player.GarlicArea.IsActivated)
             availableUpgrade.AddRange(GarlicUpgrades);
         else
             availableUpgrade.Add(new GarlicWeaponUnlockUpgrade());
+        if (player.Pistol.IsActivated)
+            availableUpgrade.AddRange(PistolUpgrades);
+        else
+            availableUpgrade.Add(new PistolWeaponUnlockUpgrade());
+        if (player.BurstSmg.IsActivated)
+            availableUpgrade.AddRange(BurstSmgUpgrades);
+        else
+            availableUpgrade.Add(new SmgWeaponUnlockUpgrade());
         return availableUpgrade.OrderBy(c => Random.Range(0, 1f)).Take(amount).ToList();
     }
 }
 
 #region Weapon Upgrades
+
+#region Pistol upgrades
+public class PistolWeaponUnlockUpgrade : PlayerUpgrade
+{
+    public override string Description => "Unlock Garlic Weapon";
+
+    public override void ApplyUpgrade(PlayerMB player)
+    {
+        player.Pistol.ActivateWeapon();
+    }
+}
+
+public class PistolWeaponDamageUpgrade : PlayerUpgrade
+{
+    private int IncreaseAmount = 3;
+    public override string Description => $"Increase Pistol damage by {IncreaseAmount}";
+
+    public override void ApplyUpgrade(PlayerMB player)
+    {
+        player.Pistol.IncreaseDamage(IncreaseAmount);
+    }
+}
+
+public class PistolWeaponFireRateUpgrade : PlayerUpgrade
+{
+    private float mRatio => 1 + IncreasePercentage / (float)100;
+    private int IncreasePercentage = 20;
+    public override string Description => $"Increase Pistol firerate by {IncreasePercentage}%";
+
+    public override void ApplyUpgrade(PlayerMB player)
+    {
+        player.Pistol.IncreaseFireRate(mRatio);
+    }
+}
+#endregion
+#region Smg upgrades
+public class SmgWeaponUnlockUpgrade : PlayerUpgrade
+{
+    public override string Description => "Unlock Garlic Weapon";
+
+    public override void ApplyUpgrade(PlayerMB player)
+    {
+        player.BurstSmg.ActivateWeapon();
+    }
+}
+
+public class SmgWeaponDamageUpgrade : PlayerUpgrade
+{
+    private int IncreaseAmount = 1;
+    public override string Description => $"Increase Smg damage by {IncreaseAmount}";
+
+    public override void ApplyUpgrade(PlayerMB player)
+    {
+        player.BurstSmg.IncreaseDamage(IncreaseAmount);
+    }
+}
+#endregion
 
 #region GarlicUpgrades
 
@@ -57,7 +133,7 @@ public class GarlicWeaponUnlockUpgrade : PlayerUpgrade
 
     public override void ApplyUpgrade(PlayerMB player)
     {
-        player.GarlicArea.gameObject.SetActive(true);
+        player.GarlicArea.ActivateWeapon();
     }
 }
 
