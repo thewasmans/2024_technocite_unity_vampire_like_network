@@ -85,7 +85,6 @@ public class GunWeaponMB : NetworkBehaviour, IActivableWeapon
     {
         var bulletMb = Instantiate(mSO.BulletPrefab, pos, dir).GetComponent<BulletMb>();
         bulletMb.Damage = mSO.BulletDamage;
-        bulletMb.NetworkBehaviour = this;
         bulletMb.Speed = mSO.BulletSpeed;
     }
 

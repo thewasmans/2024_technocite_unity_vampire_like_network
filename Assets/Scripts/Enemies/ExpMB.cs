@@ -22,6 +22,7 @@ public class ExpMB : MonoBehaviour
         if (playerExp == null)
             return;
         playerExp.AddExp(ExpValue);
-        GetComponent<NetworkObject>().Despawn(true);
+        if (NetworkManager.Singleton.IsServer)
+            GetComponent<NetworkObject>().Despawn(true);
     }
 }

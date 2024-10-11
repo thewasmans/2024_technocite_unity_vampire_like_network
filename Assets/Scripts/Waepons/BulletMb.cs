@@ -8,8 +8,6 @@ public class BulletMb : MonoBehaviour
     public NetworkObject NetworkObject;
     private Transform mTransform;
     public float LifeTime = 10f;
-    internal GunWeaponMB NetworkBehaviour;
-
     void Awake()
     {
         mTransform = transform;
@@ -18,9 +16,9 @@ public class BulletMb : MonoBehaviour
     void Start()
     {
         NetworkObject = GetComponent<NetworkObject>();
-        Debug.Log("NetworkObject is null :" + NetworkObject == null);
-        Debug.Log(gameObject.GetComponents<MonoBehaviour>().Length);
-        if (NetworkBehaviour.IsServer)
+        // Debug.Log("NetworkObject is null :" + NetworkObject == null);
+        // Debug.Log(gameObject.GetComponents<MonoBehaviour>().Length);
+        if (NetworkManager.Singleton.IsServer)
             NetworkObject.Spawn();
     }
 
@@ -36,7 +34,7 @@ public class BulletMb : MonoBehaviour
     {
         if (NetworkObject == null)
             return;
-        if (!NetworkBehaviour.IsServer)
+        if (!NetworkManager.Singleton.IsServer)
             return;
         if (NetworkObject.IsSpawned)
             NetworkObject.Despawn();
