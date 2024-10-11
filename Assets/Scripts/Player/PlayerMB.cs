@@ -36,6 +36,7 @@ public class PlayerMB : NetworkBehaviour
 
     private void SetActivityOfGarlic(bool previousValue, bool newValue)
     {
+        Debug.Log("Garlic Activation :" + newValue);
         if (newValue)
             GarlicArea.ActivateWeapon();
         else

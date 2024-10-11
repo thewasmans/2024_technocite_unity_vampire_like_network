@@ -17,8 +17,6 @@ public class BulletMb : MonoBehaviour
     void Start()
     {
         NetworkObject = GetComponent<NetworkObject>();
-        // Debug.Log("NetworkObject is null :" + NetworkObject == null);
-        // Debug.Log(gameObject.GetComponents<MonoBehaviour>().Length);
         if (NetworkManager.Singleton.IsServer)
             NetworkObject.Spawn();
     }
