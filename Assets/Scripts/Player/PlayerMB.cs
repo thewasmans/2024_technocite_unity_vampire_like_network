@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlayerMB : NetworkBehaviour
 {
@@ -17,6 +19,20 @@ public class PlayerMB : NetworkBehaviour
     public GunWeaponMB Pistol;
     public GunWeaponMB BurstSmg;
     private List<IActivableWeapon> mActivableWeapons;
+
+    // private NetworkVariable<WeaponUnlocked> mUnlockedWeaponRequest =
+    //     new NetworkVariable<WeaponUnlocked>(
+    //         WeaponUnlocked.None,
+    //         NetworkVariableReadPermission.Owner,
+    //         NetworkVariableWritePermission.Owner
+    //     );
+
+    private NetworkVariable<WeaponUnlocked> mUnlockedWeaponPermission =
+        new NetworkVariable<WeaponUnlocked>(
+            WeaponUnlocked.None,
+            NetworkVariableReadPermission.Owner,
+            NetworkVariableWritePermission.Server
+        );
     NetworkVariable<bool> nvIsGarlicActivated = new NetworkVariable<bool>(
         false,
         readPerm: NetworkVariableReadPermission.Owner,
@@ -30,26 +46,44 @@ public class PlayerMB : NetworkBehaviour
         if (IsLocalPlayer)
             GameVariables.GlobalPlayerXpManager.nvLevel.OnValueChanged +=
                 PlayerUpgradeHandler.OnLevelUpHandler;
-        mActivableWeapons.OrderBy(aw => Random.Range(0, 1f)).First().ActivateWeapon();
-        nvIsGarlicActivated.OnValueChanged += SetActivityOfGarlic;
+        if (IsClient)
+        {
+            var random = Random.Range(0, 3);
+            UnlockWeaponRpc((WeaponUnlocked)Mathf.Pow(2, random));
+        }
+        mUnlockedWeaponPermission.OnValueChanged += SetActivityForWeapons;
     }
 
-    private void SetActivityOfGarlic(bool previousValue, bool newValue)
+    private void SetActivityForWeapons(WeaponUnlocked previousValue, WeaponUnlocked newValue)
     {
-        Debug.Log("Garlic Activation :" + newValue);
-        if (newValue)
+        SetActivityForWeapons(newValue);
+    }
+
+    private void SetActivityForWeapons(WeaponUnlocked unlocked)
+    {
+        if (unlocked.HasFlag(WeaponUnlocked.Smg))
+            BurstSmg.ActivateWeapon();
+        if (unlocked.HasFlag(WeaponUnlocked.Pistol))
+            Pistol.ActivateWeapon();
+        if (unlocked.HasFlag(WeaponUnlocked.Garlic))
             GarlicArea.ActivateWeapon();
-        else
-            GarlicArea.DeactivateWeapon();
+    }
+
+    [Rpc(SendTo.Server)]
+    public void UnlockWeaponRpc(WeaponUnlocked weapon)
+    {
+        mUnlockedWeaponPermission.Value |= weapon;
+        SetActivityForWeapons(mUnlockedWeaponPermission.Value);
     }
 
     public override void OnDestroy()
     {
-        nvIsGarlicActivated.OnValueChanged -= SetActivityOfGarlic;
         if (IsLocalPlayer)
             GameVariables.GlobalPlayerXpManager.nvLevel.OnValueChanged -=
                 PlayerUpgradeHandler.OnLevelUpHandler;
+        mUnlockedWeaponPermission.OnValueChanged -= SetActivityForWeapons;
         GameVariables.RemovePlayerMB(this);
+
         base.OnDestroy();
     }
 
@@ -58,4 +92,14 @@ public class PlayerMB : NetworkBehaviour
         if (IsServer)
             nvIsGarlicActivated.Value = true;
     }
+}
+
+[Flags]
+public enum WeaponUnlocked
+{
+    None = 0,
+    Garlic = 1,
+
+    Pistol = 2,
+    Smg = 4,
 }

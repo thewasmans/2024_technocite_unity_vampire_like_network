@@ -75,7 +75,7 @@ public class PistolWeaponUnlockUpgrade : PlayerUpgrade
 
     public override void ApplyUpgrade(PlayerMB player)
     {
-        player.Pistol.ActivateWeapon();
+        player.UnlockWeaponRpc(WeaponUnlocked.Pistol);
     }
 }
 
@@ -109,7 +109,7 @@ public class SmgWeaponUnlockUpgrade : PlayerUpgrade
 
     public override void ApplyUpgrade(PlayerMB player)
     {
-        player.BurstSmg.ActivateWeapon();
+        player.UnlockWeaponRpc(WeaponUnlocked.Smg);
     }
 }
 
@@ -133,7 +133,7 @@ public class GarlicWeaponUnlockUpgrade : PlayerUpgrade
 
     public override void ApplyUpgrade(PlayerMB player)
     {
-        player.ActivateGarlic();
+        player.UnlockWeaponRpc(WeaponUnlocked.Garlic);
     }
 }
 
