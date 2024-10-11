@@ -71,7 +71,7 @@ public static class PlayerUpgrades
 #region Pistol upgrades
 public class PistolWeaponUnlockUpgrade : PlayerUpgrade
 {
-    public override string Description => "Unlock Garlic Weapon";
+    public override string Description => "Unlock Pistol Weapon";
 
     public override void ApplyUpgrade(PlayerMB player)
     {
@@ -105,7 +105,7 @@ public class PistolWeaponFireRateUpgrade : PlayerUpgrade
 #region Smg upgrades
 public class SmgWeaponUnlockUpgrade : PlayerUpgrade
 {
-    public override string Description => "Unlock Garlic Weapon";
+    public override string Description => "Unlock Smg Weapon";
 
     public override void ApplyUpgrade(PlayerMB player)
     {
