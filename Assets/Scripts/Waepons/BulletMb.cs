@@ -1,4 +1,3 @@
-using System;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -9,10 +8,16 @@ public class BulletMb : MonoBehaviour
     public NetworkObject NetworkObject;
     private Transform mTransform;
     public float LifeTime = 10f;
+    internal GunWeaponMB NetworkBehaviour;
 
     void Awake()
     {
         mTransform = transform;
+    }
+
+    void Start()
+    {
+        NetworkObject = GetComponent<NetworkObject>();
     }
 
     void Update()
@@ -23,13 +28,21 @@ public class BulletMb : MonoBehaviour
         mTransform.position += Speed * Time.deltaTime * mTransform.forward;
     }
 
+    void Despawn()
+    {
+        if (!NetworkBehaviour.IsServer)
+            return;
+        NetworkObject?.Despawn();
+    }
+
     void OnDestroy()
     {
-        NetworkObject?.Despawn();
+        Despawn();
     }
 
     internal void DestroyBullet()
     {
+        Despawn();
         Destroy(gameObject);
     }
 }
