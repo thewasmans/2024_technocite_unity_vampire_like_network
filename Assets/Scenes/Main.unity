@@ -462,7 +462,7 @@ MonoBehaviour:
   m_MaxConnectAttempts: 60
   m_DisconnectTimeoutMS: 30000
   ConnectionData:
-    Address: 10.64.48.119
+    Address: 10.64.48.102
     Port: 7777
     ServerListenAddress: 0.0.0.0
   DebugSimulator:
@@ -629,7 +629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
-  UIScene: {fileID: 102900000, guid: c8cc20aaad639ed4d80a925762e6242a, type: 3}
+  Scene: {fileID: 102900000, guid: c8cc20aaad639ed4d80a925762e6242a, type: 3}
   GameVariables: {fileID: 11400000, guid: 02c0ae86616428d4997fe2e9b5446264, type: 2}
 --- !u!1 &2045588601
 GameObject:
