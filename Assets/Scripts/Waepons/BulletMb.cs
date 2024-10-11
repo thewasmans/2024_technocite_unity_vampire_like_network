@@ -32,9 +32,9 @@ public class BulletMb : MonoBehaviour
 
     void Despawn()
     {
-        if (!NetworkBehaviour.IsServer)
-            return;
         if (NetworkObject == null)
+            return;
+        if (!NetworkBehaviour.IsServer)
             return;
         if (NetworkObject.IsSpawned)
             NetworkObject.Despawn();
