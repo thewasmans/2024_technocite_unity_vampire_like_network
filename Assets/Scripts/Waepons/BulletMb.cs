@@ -18,6 +18,8 @@ public class BulletMb : MonoBehaviour
     void Start()
     {
         NetworkObject = GetComponent<NetworkObject>();
+        if (NetworkBehaviour.IsServer)
+            NetworkObject.Spawn();
     }
 
     void Update()
@@ -32,7 +34,10 @@ public class BulletMb : MonoBehaviour
     {
         if (!NetworkBehaviour.IsServer)
             return;
-        NetworkObject?.Despawn();
+        if (NetworkObject == null)
+            return;
+        if (NetworkObject.IsSpawned)
+            NetworkObject.Despawn();
     }
 
     void OnDestroy()

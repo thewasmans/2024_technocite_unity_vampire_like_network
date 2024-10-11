@@ -87,8 +87,6 @@ public class GunWeaponMB : NetworkBehaviour, IActivableWeapon
         bulletMb.Damage = mSO.BulletDamage;
         bulletMb.NetworkBehaviour = this;
         bulletMb.Speed = mSO.BulletSpeed;
-        var no = bulletMb.GetComponent<NetworkObject>();
-        no.Spawn();
     }
 
     internal void IncreaseFireRate(float ratio) => mSO.TimeBetweenBurst /= 1 + ratio;
