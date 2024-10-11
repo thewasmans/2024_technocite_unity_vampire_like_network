@@ -51,4 +51,10 @@ public class PlayerMB : NetworkBehaviour
         GameVariables.RemovePlayerMB(this);
         base.OnDestroy();
     }
+
+    internal void ActivateGarlic()
+    {
+        if (IsServer)
+            nvIsGarlicActivated.Value = true;
+    }
 }

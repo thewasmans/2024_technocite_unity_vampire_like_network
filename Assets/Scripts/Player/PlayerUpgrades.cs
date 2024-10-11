@@ -133,7 +133,7 @@ public class GarlicWeaponUnlockUpgrade : PlayerUpgrade
 
     public override void ApplyUpgrade(PlayerMB player)
     {
-        player.GarlicArea.ActivateWeapon();
+        player.ActivateGarlic();
     }
 }
 
