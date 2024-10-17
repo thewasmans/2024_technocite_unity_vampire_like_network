@@ -71,7 +71,7 @@ public class EnemySpawner : NetworkBehaviour
 
         var enemy = Instantiate(EnemyPrefab, pos, quaternion.identity).GetComponent<EnemyMover>();
         enemy.PlayerMBs = GameVariables.PlayerMBs;
-
+        enemy.GetComponent<EnemyHealth>().HitPoint = Mathf.RoundToInt(1 + Time.time * Time.time * .001f);
         var no = enemy.GetComponent<NetworkObject>();
         no.Spawn();
         GameVariables.Enemies.Add(enemy.gameObject);
