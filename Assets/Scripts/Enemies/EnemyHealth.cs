@@ -17,7 +17,11 @@ public class EnemyHealth : MonoBehaviour
         if (HitPoint <= 0)
         {
             if (NetworkManager.Singleton.IsServer)
-                GetComponent<NetworkObject>().Despawn(true);
+            {
+                var no = GetComponent<NetworkObject>();
+                if (no.IsSpawned)
+                    no.Despawn(true);
+            }
             // Destroy(gameObject);
         }
 

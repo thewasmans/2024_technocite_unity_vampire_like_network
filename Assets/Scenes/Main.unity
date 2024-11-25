@@ -630,6 +630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShowTopMostFoldoutHeaderGroup: 1
   Scene: {fileID: 102900000, guid: c8cc20aaad639ed4d80a925762e6242a, type: 3}
+  SceneName: UI
   GameVariables: {fileID: 11400000, guid: 02c0ae86616428d4997fe2e9b5446264, type: 2}
 --- !u!1 &2045588601
 GameObject:
