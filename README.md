@@ -1,4 +1,4 @@
-# 2024_technocite_unity_vampire_like_network
+# 2024 Technocite Unity 6 Profiterole Survivor Network
 
 Vampire survivor like on local network with the new netcode api from Unity 6
 
